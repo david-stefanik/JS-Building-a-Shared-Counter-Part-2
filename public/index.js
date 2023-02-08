@@ -8,15 +8,32 @@ async function main(){
     const result = await response.json();
     
     let countValue = result.value;
+    async function update() {
+        
+    
+    let patchResponse= await fetch('http://localhost:9001/counter', {
+        method: 'PATCH',
+
+        headers: {
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            "value": countValue,
+        })
+    });  }
+                                        
+    
 
     function increment(){
         countValue++;
         countContainer.textContent = countValue;
+        update()
     }
 
     function decrement(){
         countValue--;
         countContainer.textContent = countValue;
+        update()
     }
 
     incrementButton.addEventListener('click', increment);
